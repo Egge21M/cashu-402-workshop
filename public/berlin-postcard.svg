@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <title>Berlin, after hours — workshop sample postcard</title>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#ecbd98"/><stop offset=".5" stop-color="#cc9980"/><stop offset="1" stop-color="#5f786c"/></linearGradient>
+    <linearGradient id="water" x2="0" y2="1"><stop stop-color="#749786"/><stop offset="1" stop-color="#143f34"/></linearGradient>
+    <linearGradient id="sun" x2="0" y2="1"><stop stop-color="#fae5b5"/><stop offset="1" stop-color="#f4b077"/></linearGradient>
+    <linearGradient id="tower" x2="1" y2="0"><stop stop-color="#253e35"/><stop offset=".45" stop-color="#567368"/><stop offset=".5" stop-color="#a6a99a"/><stop offset="1" stop-color="#3c5b4e"/></linearGradient>
+    <pattern id="windows" width="28" height="31" patternUnits="userSpaceOnUse"><rect width="28" height="31" fill="#244f43"/><rect x="9" y="7" width="7" height="12" fill="#d7b27c" opacity=".45"/></pattern>
+    <pattern id="nearWindows" width="35" height="39" patternUnits="userSpaceOnUse"><rect width="35" height="39" fill="#163f33"/><rect x="10" y="9" width="11" height="15" fill="#d3aa70" opacity=".5"/></pattern>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".14"/></feComponentTransfer><feBlend in="SourceGraphic" mode="soft-light"/></filter>
+  </defs>
+  <g filter="url(#grain)">
+    <path fill="url(#sky)" d="M0 0h1440v900H0z"/>
+    <circle cx="1035" cy="269" r="126" fill="url(#sun)"/>
+    <path d="M0 526h63v-83h24v-23h34v23h57v-47h60v40h78v-53h55v36h60v-63h37v60h60v-17h48v-76h43v92h69v-55h23v-29h26v29h31v58h61v-25h69v-87h29v-20h31v27h54v77h54v-64h60v58h46v-38h52v43h98v-58h46v-16h28v31h61v46h50v-44h31v-19h49v61h55v-38h46v54h60v40H0z" fill="#719081"/>
+    <g fill="url(#tower)">
+      <path d="M849 529l18-289h13l17 289z"/>
+      <path d="M870 190l2-111h4l2 111z"/>
+      <path d="M872 79V40h3v39z" fill="#263c31"/>
+      <ellipse cx="874" cy="218" rx="43" ry="28"/>
+      <ellipse cx="874" cy="210" rx="40" ry="5" fill="#b8b7a4"/>
+      <path d="M841 203h65v5h-65z" fill="#3d5649"/>
+      <path d="M851 243h46v5h-46z" fill="#263c31"/>
+    </g>
+    <g fill="#396453">
+      <path d="M0 513h167v-85l-35-20H78l-35 20H0z"/>
+      <path d="M112 535V417h93v-17l31-27 31 27v17h66v118z"/>
+      <path d="M308 539V454h46v-26h22v-15h19v15h28v26h99v85z"/>
+      <path d="M463 514V383h83v-17h47v17h74v131z"/>
+      <path d="M1060 526V452h94v-71h115v145z"/>
+      <path d="M1260 533V443h57v-23h82v23h41v90z"/>
+    </g>
+    <path d="M0 516h1440v384H0z" fill="url(#water)"/>
+    <path d="M0 564c244-10 389 19 604 11s499-33 836-11" stroke="#aeb29b" stroke-width="2" opacity=".45" fill="none"/>
+    <path d="M183 624h195m518-15h271M65 693h207m297-30h202m393 16h147M343 758h208m311 36h301M103 841h425m605-31h243" stroke="#aeb29b" stroke-width="2" opacity=".3"/>
+    <path d="M0 505h583v57H0z" fill="#254d3d"/>
+    <path d="M0 529h583v78h-31c-4-46-68-46-72 0h-38c-4-46-68-46-72 0h-39c-4-46-68-46-72 0h-39c-4-46-68-46-72 0h-38c-4-46-68-46-72 0H0z" fill="#4c6c57"/>
+    <path d="M0 508h589v7H0z" fill="#adb397"/>
+    <path d="M0 776l311-34 370 158H0z" fill="#0e3025"/>
+    <path d="M1197 628l243-29v301H920z" fill="#0e3025"/>
+    <path d="M0 669V331h106l63 63v275z" fill="url(#nearWindows)"/>
+    <path d="M-18 333l74-60 118 62v14H-18z" fill="#122d23"/>
+    <path d="M162 719V439h116v-18h64v18h68v280z" fill="url(#windows)"/>
+    <path d="M145 439l37-39h216l26 39z" fill="#173a2c"/>
+    <path d="M263 420v-43h37v43z" fill="#183d2f"/>
+    <path d="M1201 734V358h107v-20h99v20h33v376z" fill="url(#nearWindows)"/>
+    <path d="M1187 358v-17l117-68 136 55v30z" fill="#122d23"/>
+    <g fill="#0c2d23"><path d="M1102 687v-74h30v74z"/><ellipse cx="1117" cy="591" rx="66" ry="58"/><ellipse cx="1088" cy="630" rx="56" ry="48"/><ellipse cx="1150" cy="635" rx="60" ry="52"/></g>
+    <g fill="none" stroke="#ead5ac" opacity=".7"><path d="M575 96q13-12 26 0q13-12 26 0M668 130q10-9 20 0q10-9 20 0" stroke-width="2"/></g>
+  </g>
+</svg>

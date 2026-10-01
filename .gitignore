@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Browser test artifacts can contain invoices and operation diagnostics.
+test-results/
+playwright-report/
