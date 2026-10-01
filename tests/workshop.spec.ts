@@ -234,6 +234,25 @@ for (const encoding of ["creqA", "creqB"]) {
     await expect(page.getByRole("button", { name: "Add funds" })).toBeEnabled()
     await expect.poll(() => balance(page)).toBe(paidBalance)
     expect(redemptions).toBe(1)
+    await expect(
+      page.getByRole("img", { name: /Berlin postcard/ })
+    ).not.toBeVisible()
+    await expect(
+      page.getByRole("button", { name: "Pay to unlock", exact: true })
+    ).toBeVisible()
+    await requestImage(page)
+    await expect(
+      page.getByRole("button", { name: /Pay.*sats & unlock/ })
+    ).toBeVisible()
+    expect((await context(page)).purchase?.operationId).not.toBe(preparedId)
+    expect(redemptions).toBe(1)
+    await page.getByRole("button", { name: "Cancel purchase" }).click()
+    await expect(
+      page.getByRole("button", { name: "Request payment details" })
+    ).toBeVisible()
+    await page
+      .getByRole("button", { name: "Close dialog", exact: true })
+      .click()
     const invoice = fakeInvoice()
     await page.getByRole("button", { name: "Withdraw", exact: true }).click()
     await page.getByLabel("Lightning invoice", { exact: true }).fill(invoice)
@@ -378,4 +397,48 @@ test("a paid non-image response remains unresolved without a replacement payment
   )
   expect(redemptions).toBe(1)
   await expect(page.getByText("The view is yours")).not.toBeVisible()
+})
+
+test("reload removes a legacy cached image without clearing the wallet", async ({
+  page,
+}) => {
+  const originalBalance = await balance(page)
+  await page.evaluate(async () => {
+    const db = await new Promise<IDBDatabase>((resolve) => {
+      const request = indexedDB.open("coco-berlin-context-v2", 1)
+      request.onsuccess = () => resolve(request.result)
+    })
+    await new Promise<void>((resolve, reject) => {
+      const transaction = db.transaction("context", "readwrite")
+      transaction.objectStore("context").put(
+        {
+          mintUrl: "https://testnut.cashu.space",
+          purchase: {
+            resourceUrl: "http://127.0.0.1:5189/image",
+            requestId: "legacy-cache-test",
+            startedAt: Date.now(),
+            phase: "delivered",
+            content: new Blob(["legacy image"], { type: "image/svg+xml" }),
+          },
+        },
+        "wallet"
+      )
+      transaction.oncomplete = () => {
+        db.close()
+        resolve()
+      }
+      transaction.onabort = () =>
+        reject(new Error("Could not prepare legacy context"))
+    })
+  })
+  await page.reload()
+  await expect(page.getByRole("button", { name: "Add funds" })).toBeEnabled()
+  await expect.poll(() => balance(page)).toBe(originalBalance)
+  expect("content" in ((await context(page)).purchase ?? {})).toBe(false)
+  await expect(
+    page.getByRole("img", { name: /Berlin postcard/ })
+  ).not.toBeVisible()
+  await expect(
+    page.getByRole("button", { name: "Pay to unlock", exact: true })
+  ).toBeVisible()
 })

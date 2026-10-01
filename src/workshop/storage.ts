@@ -19,7 +19,6 @@ export type PurchaseContext = {
   operationId?: string
   quote?: PaymentQuote
   phase: "preparing" | "review" | "executing" | "submitted" | "delivered"
-  content?: Blob
 }
 export type WalletContext = {
   mintUrl: string
@@ -44,7 +43,14 @@ export async function readContext(): Promise<WalletContext | undefined> {
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("context")
     const request = transaction.objectStore("context").get("wallet")
-    request.onsuccess = () => resolve(request.result)
+    request.onsuccess = () => {
+      const context = request.result as WalletContext | undefined
+      // Remove images saved by the previous version while keeping payment recovery metadata.
+      if (context?.purchase && "content" in context.purchase) {
+        delete context.purchase.content
+        void writeContext(context).then(() => resolve(context), reject)
+      } else resolve(context)
+    }
     request.onerror = () =>
       reject(new Error("Could not read purchase storage."))
   })

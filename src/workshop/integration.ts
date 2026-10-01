@@ -168,7 +168,7 @@ export function useWorkshopIntegration(
         })
       if (kind === "purchase") {
         const active = contextRef.current.purchase
-        const unresolved = !!active
+        const unresolved = !!active && active.phase !== "delivered"
         setPurchase({
           status: unresolved ? "unresolved" : "error",
           message: text,
@@ -245,10 +245,7 @@ export function useWorkshopIntegration(
         )
       }
       if (!active) return
-      if (retained?.phase === "delivered" && retained.content) {
-        showImage(retained.content)
-        setTrace(initialTrace.map((entry) => ({ ...entry, status: "success" })))
-      } else if (retained) {
+      if (retained && retained.phase !== "delivered") {
         const operation = retained.operationId
           ? await coco.ops.send.get(retained.operationId)
           : null
@@ -333,14 +330,10 @@ export function useWorkshopIntegration(
     const content = await imageResponse(response)
     await save({
       ...contextRef.current,
-      purchase: { ...retained, phase: "delivered", content },
+      purchase: { ...retained, phase: "delivered" },
     })
     showImage(content)
-    step(
-      3,
-      "success",
-      "The protected API returned the image; cached for reload"
-    )
+    step(3, "success", "The protected API returned the image")
     await refresh()
   }
 
@@ -444,7 +437,16 @@ export function useWorkshopIntegration(
         }),
       requestResource: () =>
         guard("purchase", async () => {
-          if (contextRef.current.purchase) return
+          const previous = contextRef.current.purchase
+          if (previous?.phase === "delivered") {
+            const operation = previous.operationId ? await send.refresh() : null
+            if (operation?.state !== "finalized")
+              throw new Error(
+                "The previous payment is still settling. Retry once it has finalized."
+              )
+            await save({ ...contextRef.current, purchase: undefined })
+            send.reset()
+          } else if (previous) return
           if (!config.resourceUrl)
             throw new Error(
               "Set VITE_RESOURCE_URL to the organizer's protected image API, then restart Vite."

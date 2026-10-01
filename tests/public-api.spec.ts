@@ -74,13 +74,12 @@ test("public organizer API: real challenge, test-mint payment, protected image, 
   await page.reload()
   await expect(page.getByRole("button", { name: "Add funds" })).toBeEnabled()
   await expect.poll(() => balance.innerText()).toBe(paidBalance)
-  await expect
-    .poll(() =>
-      page
-        .getByRole("img", { name: /Berlin postcard/ })
-        .evaluate((img: HTMLImageElement) => img.naturalWidth)
-    )
-    .toBeGreaterThan(0)
+  await expect(
+    page.getByRole("img", { name: /Berlin postcard/ })
+  ).not.toBeVisible()
+  await expect(
+    page.getByRole("button", { name: "Pay to unlock", exact: true })
+  ).toBeVisible()
   const invoice = fakeInvoice()
   await page.getByRole("button", { name: "Withdraw", exact: true }).click()
   await page.getByLabel("Lightning invoice", { exact: true }).fill(invoice)
