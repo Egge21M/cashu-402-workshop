@@ -1,6 +1,6 @@
 # Coco integration and workshop alignment
 
-Integration run: **1 October 2026**. Working branch: **`feat/coco-workshop-integration`**, in the independent Git repository at `demo/frontend`. The supplied UI starter contained existing uncommitted changes; those were preserved while completing its integration. The workspace root's Git metadata is unavailable in this environment, so this is a frontend branch, not a branch in the root checkout. The completed starter and integration are saved in a local commit on that branch; no remote push or pull request was requested.
+Integration run: **1 October 2026**. Working branch: **`feat/coco-workshop-integration`**, in the independent Git repository at `demo/frontend`. The supplied UI starter contained existing uncommitted changes; those were preserved while completing its integration. The workspace root's Git metadata is unavailable in this environment, so this is a frontend branch, not a branch in the root checkout. The initial integration was committed locally on that branch. On 2 October 2026, the frontend was published at [Egge21M/cashu-402-workshop](https://github.com/Egge21M/cashu-402-workshop), with `workshop/starter` as the default no-op UI branch and `workshop/done` as the completed reference. Both branches were pushed; no pull request was created.
 
 ## Result
 
