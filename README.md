@@ -5,15 +5,20 @@ This branch has the complete workshop UI and pinned Coco dependencies, with no p
 ## Branches in this nested frontend repository
 
 - **`workshop/starter`**: start the workshop agent here. Coco is installed but not wired into React or the UI.
-- **`workshop/done`**: completed and tested integration as saved before preparing this starter. Use it as the labelled fallback/reference. `feat/coco-workshop-integration` retains the same completed history.
+- **`workshop/done`**: completed and tested integration as saved before preparing this starter. Use it as the labelled fallback/reference.
 
-Run commands from `demo/frontend`, not the parent presentation repository:
+Public repository: [Egge21M/cashu-402-workshop](https://github.com/Egge21M/cashu-402-workshop). `workshop/starter` is the default branch.
+
+Clone and run from this standalone repository's root:
 
 ```sh
-git switch workshop/starter
+git clone --branch workshop/starter https://github.com/Egge21M/cashu-402-workshop.git
+cd cashu-402-workshop
 npm ci
 npm run dev
 ```
+
+In the presenter's parent workspace, this nested repository lives at `demo/frontend`; the public clone has these files directly at its root.
 
 Or use `bun install --frozen-lockfile` and `bun run dev`. Use Node 22.22.1 or a compatible supported release. Both branches retain matching Coco core/React/IndexedDB 2.0.0, cashu-ts 5.0.0-rc.4, BIP39 2.4.0 and TypeScript 5.9.3, plus npm and Bun lockfiles.
 
