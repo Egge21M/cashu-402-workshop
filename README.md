@@ -1,15 +1,26 @@
 # Cashu workshop frontend
 
-Completed React 19 / Coco workshop demo on `feat/coco-workshop-integration` in this frontend's Git repository. The wallet uses pinned `@cashu/coco-core`, `@cashu/coco-react`, and `@cashu/coco-indexeddb` 2.0.0, with the workshop's matching cashu-ts release. TypeScript is 5.9.3 to satisfy Coco's peer dependency. The supplied starter's existing UI is preserved.
+Completed React 19 / Coco workshop demo on `workshop/done` in this frontend's Git repository. The wallet uses pinned `@cashu/coco-core`, `@cashu/coco-react`, and `@cashu/coco-indexeddb` 2.0.0, with the workshop's matching cashu-ts release. TypeScript is 5.9.3 to satisfy Coco's peer dependency. The supplied starter's existing UI is preserved.
+
+## Workshop branches
+
+Public repository: [Egge21M/cashu-402-workshop](https://github.com/Egge21M/cashu-402-workshop).
+
+- **`workshop/starter`** (default): complete UI and Coco dependencies, with silent no-op payment actions. Start a workshop implementation here.
+- **`workshop/done`**: completed wallet, funding, HTTP 402 image payment and withdrawal. Use this branch as the reference build.
 
 ## Run
 
-Use Node 22.22.1 or a compatible supported release:
+Use Node 22.22.1 or a compatible supported release. To run this completed reference:
 
 ```sh
+git clone --branch workshop/done https://github.com/Egge21M/cashu-402-workshop.git
+cd cashu-402-workshop
 npm ci
 npm run dev
 ```
+
+After cloning, stop Vite before switching with `git switch workshop/starter` or `git switch workshop/done`, then reinstall with `npm ci` and restart. Both branches use the same pinned dependencies and lockfiles.
 
 Or keep the workshop's Bun workflow:
 
@@ -18,7 +29,7 @@ bun install --frozen-lockfile
 bun run dev
 ```
 
-Open [the frontend](http://localhost:5173). The Slidev presentation at the repository root runs separately. Both npm and Bun lockfiles are retained.
+Open [the frontend](http://localhost:5173). The Slidev presentation lives in the separate parent workshop workspace; this public repository contains the frontend only. Both npm and Bun lockfiles are retained.
 
 The default resource is [the organizer's image API](https://btcplusplus-402-backend.fly.dev/image), reached directly using browser CORS. It advertises **1 net sat**, rather than the starter's placeholder 10. `.env.example` documents optional overrides; copy it to `.env.local` and restart Vite after changes. The backend permits GET/OPTIONS, accepts `X-Cashu`, and exposes its challenge header. An optional Vite proxy is available by setting `VITE_RESOURCE_URL=/api/workshop-image` and `VITE_RESOURCE_PROXY_TARGET` to the API URL. A static deployment using that fallback needs its own reverse proxy; Vite configuration is not bundled into static assets.
 
