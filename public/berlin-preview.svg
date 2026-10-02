@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <title>Public blurred teaser — no protected image</title>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#d9ad92"/><stop offset="1" stop-color="#446955"/></linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="24"/></filter>
+  </defs>
+  <path fill="url(#sky)" d="M0 0h1440v900H0z"/>
+  <g filter="url(#blur)">
+    <circle cx="1035" cy="269" r="126" fill="#f7d0a0"/>
+    <path d="M0 490h100v-80h160v65h160V370h180v125h150v-70h170v50h200v-90h140v90h180v425H0z" fill="#416955"/>
+    <path d="M844 527l24-292h16l20 292z" fill="#284d3c"/>
+    <path d="M869 198V56h9v142z" fill="#2e4e3e"/>
+    <ellipse cx="874" cy="218" rx="44" ry="29" fill="#456452"/>
+    <path d="M0 570h1440v330H0z" fill="#285445"/>
+    <path d="M0 900V314h125v376h290V438h-85v240zM1440 900V320h-230v426h-115v154z" fill="#183c2c"/>
+  </g>
+</svg>
